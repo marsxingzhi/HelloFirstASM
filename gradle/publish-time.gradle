@@ -1,0 +1,31 @@
+// 1. maven插件
+apply plugin: 'maven'
+
+// 2. maven信息
+ext {
+    PUBLISH_GROUP_ID = 'com.mars.library'
+    PUBLISH_ARTIFACT_ID = 'time'
+    PUBLISH_VERSION = '0.0.1'
+}
+
+// 3. maven路径
+uploadArchives {
+    repositories.mavenDeployer {
+        repository(url: uri("$rootDir/maven"))
+
+        pom.project {
+            groupId project.PUBLISH_GROUP_ID
+            artifactId project.PUBLISH_ARTIFACT_ID
+            version project.PUBLISH_VERSION
+        }
+    }
+}
+
+task androidSourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.java.sourceFiles
+}
+
+artifacts {
+    archives androidSourcesJar
+}
