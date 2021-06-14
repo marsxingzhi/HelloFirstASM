@@ -1,0 +1,30 @@
+plugins {
+    id 'java-library'
+    id 'kotlin'
+    id 'maven-publish'
+}
+
+publishing {
+    publications {
+        SimpleAsmPlugin(MavenPublication) {
+            from components.kotlin
+            groupId 'com.mars.plugin'
+            artifactId 'simple-asm'
+            version '0.0.2'
+        }
+    }
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_7
+    targetCompatibility = JavaVersion.VERSION_1_7
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    // 使用项目中指定的gradle wrapper版本，插件中使用的Project对象、Plugin接口就来自这个库
+    implementation gradleApi()
+    // android gradle plugin依赖，提供AppExtension对象，以及Transform阶段
+    implementation "com.android.tools.build:gradle:4.1.3"
+}
