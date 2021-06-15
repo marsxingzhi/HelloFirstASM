@@ -3,4 +3,4 @@ include ':time:asm-time-example'
 include ':time:asm-time-plugin'
 include ':demo:asm-plugin'
 include ':app'
-rootProject.name = "AsmProject"
+rootProject.name = "HelloFirstAsm"
