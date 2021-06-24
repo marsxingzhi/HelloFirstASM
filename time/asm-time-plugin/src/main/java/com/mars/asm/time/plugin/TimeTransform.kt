@@ -52,6 +52,7 @@ class TimeTransform : Transform() {
 
         transformInvocation ?: return
 
+        // 如果非增量，则清空老的输出内容
         if (!transformInvocation.isIncremental) {
             transformInvocation.outputProvider.deleteAll()
         }

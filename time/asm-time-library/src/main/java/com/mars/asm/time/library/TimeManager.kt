@@ -19,8 +19,20 @@ object TimeManager {
         }
     }
 
+    fun timeMethod(className: String, method: String, cost: Long) {
+        if (Looper.myLooper() == Looper.getMainLooper()
+            && cost >= threshold()
+        ) {
+            Log.e(TAG, "------ start >>> ------")
+            Log.e(TAG, "the class's name: $className")
+            Log.e(TAG, "the method's name: $method")
+            Log.e(TAG, "the cost time: $cost ms")
+            Log.e(TAG, "------ <<< end ------")
+        }
+    }
+
     private fun realTimeMethod(method: String, cost: Long) {
-        Log.e(TAG, "$method cost $cost")
+        Log.e(TAG, "$method cost $cost ms")
     }
 
     // 最小阈值

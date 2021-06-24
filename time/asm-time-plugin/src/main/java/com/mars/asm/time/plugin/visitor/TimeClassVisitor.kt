@@ -38,6 +38,6 @@ class TimeClassVisitor(classVisitor: ClassVisitor) : ClassVisitor(Opcodes.ASM7, 
     ): MethodVisitor {
         println("TimeClassVisitor---visitMethod---name = $name, descriptor = $descriptor")
         val vm = super.visitMethod(access, name, descriptor, signature, exceptions)
-        return TimeMethodVisitor(api, vm, access, name, descriptor, className + File.separator + name)
+        return TimeMethodVisitor(className, api, vm, access, name, descriptor, className + File.separator + name)
     }
 }

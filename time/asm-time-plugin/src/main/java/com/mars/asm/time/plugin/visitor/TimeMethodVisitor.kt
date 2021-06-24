@@ -11,6 +11,7 @@ import org.objectweb.asm.commons.Method
  * Created by geyan on 2021/4/15
  */
 class TimeMethodVisitor(
+    className: String?,
     api: Int,
     methodVisitor: MethodVisitor,
     access: Int,
@@ -23,8 +24,10 @@ class TimeMethodVisitor(
     var end: Int = 0
     var isMatch = false
     var mMethodName: String? = null
+    var mClassName: String? = null
 
     init {
+        mClassName = className?.replace("/", ".")
         mMethodName = methodAbsoluteName?.replace("/", ".")
     }
 
@@ -60,17 +63,17 @@ class TimeMethodVisitor(
                 "INSTANCE",
                 Type.getType("Lcom/mars/asm/time/library/TimeManager;")
             )
-            visitLdcInsn(mMethodName)
+            visitLdcInsn(mClassName)
+//            visitLdcInsn(mMethodName)
+            visitLdcInsn(name)
             invokeStatic(Type.getType("Ljava/lang/System;"), Method("currentTimeMillis", "()J"))
-//            end = newLocal(Type.LONG_TYPE)
-//            storeLocal(end)
 
-//            loadLocal(end)
             loadLocal(start)
             math(SUB, Type.LONG_TYPE)
             invokeVirtual(
                 Type.getType("Lcom/mars/asm/time/library/TimeManager;"),
-                Method("timeMethod", "(Ljava/lang/String;J)V")
+//                Method("timeMethod", "(Ljava/lang/String;J)V")
+                Method("timeMethod", "(Ljava/lang/String;Ljava/lang/String;J)V")
             )
             return
         }
