@@ -236,7 +236,13 @@ public class HelloWorldDump implements Opcodes {
     }
 
     private void createClass(ClassWriter classWriter) {
-        classWriter.visit(V1_8, ACC_PUBLIC, "generate/_HelloWorld", null, "java/lang/Object", null);
+        classWriter.visit(
+                V1_8,
+                ACC_PUBLIC,
+                "generate/_HelloWorld",
+                null,
+                "java/lang/Object",
+                null);
     }
 
     private void createConstructor(ClassWriter classWriter) {
