@@ -108,6 +108,9 @@ public class ClassChangeVisitor extends ClassVisitor {
             generateEmptyMethodBody(mv, owner, access, name, descriptor);
             return null;  // 返回null，那么原始方法就被擦除了
         }
+        if (name.equals("test") && descriptor.equals("(II)V")) {
+            mv = new MethodReplaceAdapter(Opcodes.ASM9, mv);
+        }
         return mv;
     }
 

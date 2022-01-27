@@ -59,4 +59,10 @@ public class HelloWorld_3 {
         }
         throw new IllegalArgumentException("username or password is not correct");
     }
+
+    // ASM：将Math.max替换成Math.min
+    public void test(int a, int b)  {
+        int c = Math.max(a, b);
+        System.out.println(c);
+    }
 }
