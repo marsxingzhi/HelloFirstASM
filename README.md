@@ -20,3 +20,7 @@ Label的使用可以分成三个步骤：
 1. 创建Label对象
 2. 确定Label位置，`mv.visitLabel`
 3. 使用跳转方法，建立联系，例如：`mv.visitJumpInsn`
+
+### Thread-Task  
+线程替换，将系统线程替换成自定义的线程。
+- [ ] new Thread
