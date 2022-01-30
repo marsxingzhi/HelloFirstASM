@@ -26,7 +26,6 @@ public class HelloWorldDump implements Opcodes {
     }
 
     /**
-     * 生成try-catch语句
      * public void generateTryCatch() {
      *     try {
      *         int value = 0;
@@ -37,7 +36,6 @@ public class HelloWorldDump implements Opcodes {
      */
     private void createMethod5(ClassWriter classWriter) {
         MethodVisitor methodVisitor = classWriter.visitMethod(ACC_PUBLIC, "generateTryCatch", "()V", null, null);
-        methodVisitor.visitCode();
 
         Label startLabel = new Label();
         Label endLabel = new Label();
@@ -45,10 +43,13 @@ public class HelloWorldDump implements Opcodes {
         Label returnLabel = new Label();
 
         {
+            methodVisitor.visitCode();
             methodVisitor.visitTryCatchBlock(startLabel, endLabel, exceptionHandlerLabel, "java/lang/Exception");
         }
 
         {
+            // 在执行这一段代码时，如果遇到java/lang/Exception异常，则跳转到exceptionHandlerLabel位置，
+            // 如果没有遇到异常，会顺序执行，跳转到endLabel
             methodVisitor.visitLabel(startLabel);
             methodVisitor.visitInsn(ICONST_0);
             methodVisitor.visitVarInsn(ISTORE, 1);
@@ -76,7 +77,6 @@ public class HelloWorldDump implements Opcodes {
     }
 
     /**
-     * 生成for语句
      * public void generateFor() {
      *     for (int i = 0; i < 10; i++) {
      *         System.out.println(i);
@@ -98,10 +98,10 @@ public class HelloWorldDump implements Opcodes {
         Label returnLabel = new Label();
 
         {
-            methodVisitor.visitLabel(label0);
-            methodVisitor.visitVarInsn(ILOAD, 1);
-            methodVisitor.visitIntInsn(BIPUSH, 10);
-            methodVisitor.visitJumpInsn(IF_ICMPGE, returnLabel);
+            methodVisitor.visitLabel(label0);  // 确定位置
+            methodVisitor.visitVarInsn(ILOAD, 1);  // i
+            methodVisitor.visitIntInsn(BIPUSH, 10);  // 常量10
+            methodVisitor.visitJumpInsn(IF_ICMPGE, returnLabel);   // >=，如果大于等于，就return
             methodVisitor.visitIincInsn(1, 1);
             methodVisitor.visitJumpInsn(GOTO, label0);
         }
@@ -154,6 +154,22 @@ public class HelloWorldDump implements Opcodes {
         methodVisitor.visitEnd();
     }
 
+    /**
+     * 实现switch语句，lookupswitch、tableswitch
+     *
+     *     public void test(int val) {
+     *         switch (val) {
+     *             case 1:
+     *                 System.out.println("val = 1");
+     *                 break;
+     *             case 2:
+     *                 System.out.println("val = 2");
+     *                 break;
+     *             default:
+     *                 System.out.println("val is unknown");
+     *         }
+     *     }
+     */
     private void createMethod2(ClassWriter classWriter) {
         MethodVisitor methodVisitor = classWriter.visitMethod(ACC_PUBLIC, "test1", "(I)V", null, null);
 
@@ -200,6 +216,20 @@ public class HelloWorldDump implements Opcodes {
         methodVisitor.visitEnd();
     }
 
+    /**
+     * public void test(int value) {
+     *     if (value == 0) {
+     *         System.out.println("value is 0")
+     *     } else {
+     *         System.out.println("value is not 0")
+     *     }
+     * }
+     *
+     * Label的使用可以分成三步：
+     * 1. 创建Label对象
+     * 2. 确定Label位置
+     * 3. 使用跳转相关的方法如：visitJumpInsn，建立联系
+     */
     private void createMethod(ClassWriter classWriter) {
         MethodVisitor methodVisitor = classWriter.visitMethod(ACC_PUBLIC, "test", "(I)V", null, null);
 
