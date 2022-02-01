@@ -6,10 +6,10 @@ import org.objectweb.asm.MethodVisitor;
 /**
  * Created by JohnnySwordMan on 2022/1/31
  */
-public class ThreadClassVisitor extends ClassVisitor {
+public class ClassThreadOptVisitor extends ClassVisitor {
 
 
-    public ThreadClassVisitor(int api, ClassVisitor classVisitor) {
+    public ClassThreadOptVisitor(int api, ClassVisitor classVisitor) {
         super(api, classVisitor);
     }
 

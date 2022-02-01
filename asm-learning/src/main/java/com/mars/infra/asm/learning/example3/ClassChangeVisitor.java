@@ -96,7 +96,7 @@ public class ClassChangeVisitor extends ClassVisitor {
         MethodVisitor mv = super.visitMethod(access, name, descriptor, signature, exceptions);
         // 也可以对所有方法插入，但要排除构造函数
         if (name.equals("test") && descriptor.equals("()V")) {
-            mv = new MethodChangeVisitor(Opcodes.ASM9, mv);
+            mv = new MethodEnterExitAdapter(Opcodes.ASM9, mv);
         }
         // String name, int age, long idCard, Object obj
         if (name.equals("test1") && descriptor.equals("(Ljava/lang/String;IJLjava/lang/Object;)I")) {

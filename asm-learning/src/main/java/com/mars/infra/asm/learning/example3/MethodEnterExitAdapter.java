@@ -6,11 +6,13 @@ import org.objectweb.asm.Opcodes;
 
 /**
  * Created by JohnnySwordMan on 2022/1/26
+ *
+ * 在方法开始和结束的地方添加语句
  */
-public class MethodChangeVisitor extends MethodVisitor {
+public class MethodEnterExitAdapter extends MethodVisitor {
 
 
-    public MethodChangeVisitor(int api, MethodVisitor methodVisitor) {
+    public MethodEnterExitAdapter(int api, MethodVisitor methodVisitor) {
         super(api, methodVisitor);
     }
 
