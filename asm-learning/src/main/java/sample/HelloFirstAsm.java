@@ -27,4 +27,9 @@ public class HelloFirstAsm {
 //    public int mul(int a, int b) {
 //        return a * b;
 //    }
+
+    // ASM：在方法开始和结束的地方添加一个语句
+    public void test() {
+        System.out.println("this is a test method.");
+    }
 }

@@ -8,4 +8,10 @@ public class HelloWorldTest {
     public int mul(int a, int b) {
         return a * b;
     }
+
+    public void test() {
+        System.out.println("method start");
+        System.out.println("this is a test method.");
+        System.out.println("method end");
+    }
 }

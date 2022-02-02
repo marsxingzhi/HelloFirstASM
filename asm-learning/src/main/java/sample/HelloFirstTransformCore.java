@@ -29,8 +29,11 @@ class HelloFirstTransformCore {
 
 //        ClassMethodRemoveVisitor classVisitor = new ClassMethodRemoveVisitor(Opcodes.ASM9, classWriter,
 //                "add", "(II)I");
-        ClassMethodAddVisitor classVisitor = new ClassMethodAddVisitor(Opcodes.ASM9, classWriter,
-                Opcodes.ACC_PUBLIC, "mul", "(II)I");
+//        ClassMethodAddVisitor classVisitor = new ClassMethodAddVisitor(Opcodes.ASM9, classWriter,
+//                Opcodes.ACC_PUBLIC, "mul", "(II)I");
+
+        MethodEnterExitVisitor classVisitor = new MethodEnterExitVisitor(Opcodes.ASM9, classWriter,
+                "test", "()V");
 
 
         classReader.accept(classVisitor, ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES);
