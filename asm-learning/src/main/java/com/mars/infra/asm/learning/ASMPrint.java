@@ -15,7 +15,8 @@ import java.io.PrintWriter;
 public class ASMPrint {
     public static void main(String[] args) throws IOException {
         // (1) 设置参数
-        String className = "com.mars.infra.asm.learning.test.HelloWorldTest";
+//        String className = "com.mars.infra.asm.learning.test.HelloWorldTest";
+        String className = "thread.ThreadTest";
         int parsingOptions = ClassReader.SKIP_FRAMES | ClassReader.SKIP_DEBUG;
         boolean asmCode = true;
 

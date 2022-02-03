@@ -11,6 +11,16 @@ public class HelloWorldTest {
         return a * b;
     }
 
+    public void query() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("线程执行任务");
+            }
+        });
+        thread.start();
+    }
+
     public void test() {
         timer -= System.currentTimeMillis();
         System.out.println("method start");

@@ -1,4 +1,4 @@
-package com.mars.infra.asm.learning.thread;
+package thread;
 
 /**
  * @author johnsonlee
