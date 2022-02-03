@@ -36,8 +36,10 @@ class HelloFirstTransformCore {
 //                "test", "()V");
 
         //  public int test(String name, int age, long idCard, Object obj)
-        ClassMethodParamPrintVisitor classVisitor = new ClassMethodParamPrintVisitor(Opcodes.ASM9, classWriter,
-                Opcodes.ACC_PUBLIC,"test", "(Ljava/lang/String;IJLjava/lang/Object;)I");
+//        ClassMethodParamPrintVisitor classVisitor = new ClassMethodParamPrintVisitor(Opcodes.ASM9, classWriter,
+//                Opcodes.ACC_PUBLIC,"test", "(Ljava/lang/String;IJLjava/lang/Object;)I");
+
+        ClassMethodTimeVisitor classVisitor = new ClassMethodTimeVisitor(Opcodes.ASM9, classWriter, "add2");
 
 
         classReader.accept(classVisitor, ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES);

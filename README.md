@@ -494,6 +494,57 @@ class MethodParamPrintAdvanceAdapter(
         )
     }
 }
+```   
+### 八、方法耗时     
+定义timer字段，然后在方法开始时，添加`timer -= System.currentTimeMillis()`；
+在方法结束时，添加`timer += System.currentTimeMillis()`；
+这样，timer值就表示该方法的耗时
+```Kotlin
+class ComputeTimeAdapter(
+    api: Int,
+    methodVisitor: MethodVisitor,
+    private val owner: String
+) : MethodVisitor(api, methodVisitor) {
+
+    override fun visitCode() {
+        // 需要加载this变量，如果timer是静态的，则不需要
+        super.visitVarInsn(Opcodes.ALOAD, 0)
+        super.visitInsn(Opcodes.DUP)
+
+
+        super.visitFieldInsn(Opcodes.GETFIELD, owner, "timer", "J")
+        super.visitMethodInsn(
+            Opcodes.INVOKESTATIC,
+            "java/lang/System",
+            "currentTimeMillis",
+            "()J",
+            false
+        )
+        super.visitInsn(Opcodes.LSUB)
+        super.visitFieldInsn(Opcodes.PUTFIELD, owner, "timer", "J")
+        super.visitCode()
+    }
+
+    override fun visitInsn(opcode: Int) {
+        if (opcode >= Opcodes.IRETURN && opcode <= Opcodes.RETURN || opcode == Opcodes.ATHROW) {
+            super.visitVarInsn(Opcodes.ALOAD, 0)
+            super.visitInsn(Opcodes.DUP)
+
+
+            super.visitFieldInsn(Opcodes.GETFIELD, owner, "timer", "J")
+            super.visitMethodInsn(
+                Opcodes.INVOKESTATIC,
+                "java/lang/System",
+                "currentTimeMillis",
+                "()J",
+                false
+            )
+            super.visitInsn(Opcodes.LADD)
+            super.visitFieldInsn(Opcodes.PUTFIELD, owner, "timer", "J")
+        }
+        super.visitInsn(opcode)
+    }
+}
 ```
 
 ### Thread-Task  

@@ -5,14 +5,18 @@ package com.mars.infra.asm.learning.test;
  */
 public class HelloWorldTest {
 
+    private long timer;
+
     public int mul(int a, int b) {
         return a * b;
     }
 
     public void test() {
+        timer -= System.currentTimeMillis();
         System.out.println("method start");
         System.out.println("this is a test method.");
         System.out.println("method end");
+        timer += System.currentTimeMillis();
     }
 
     public int test(String name, int age, long idCard, Object obj) {

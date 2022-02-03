@@ -1,5 +1,7 @@
 package sample;
 
+import java.util.Random;
+
 /**
  * Created by JohnnySwordMan on 2022/2/1
  */
@@ -41,5 +43,14 @@ public class HelloFirstAsm {
         hashCode += (int) (idCard % Integer.MAX_VALUE);
         hashCode += obj.hashCode();
         return hashCode;
+    }
+
+    // ASM：计算方法耗时
+    public int add2(int a, int b) throws InterruptedException {
+        int c = a + b;
+        Random rand = new Random(System.currentTimeMillis());
+        int num = rand.nextInt(300);
+        Thread.sleep(100 + num);
+        return c;
     }
 }
