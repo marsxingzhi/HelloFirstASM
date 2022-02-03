@@ -32,4 +32,14 @@ public class HelloFirstAsm {
     public void test() {
         System.out.println("this is a test method.");
     }
+
+    // ASM: 打印方法入参和返回值
+    public int test(String name, int age, long idCard, Object obj) {
+        int hashCode = 0;
+        hashCode += name.hashCode();
+        hashCode += age;
+        hashCode += (int) (idCard % Integer.MAX_VALUE);
+        hashCode += obj.hashCode();
+        return hashCode;
+    }
 }

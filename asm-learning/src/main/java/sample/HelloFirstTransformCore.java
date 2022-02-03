@@ -32,8 +32,12 @@ class HelloFirstTransformCore {
 //        ClassMethodAddVisitor classVisitor = new ClassMethodAddVisitor(Opcodes.ASM9, classWriter,
 //                Opcodes.ACC_PUBLIC, "mul", "(II)I");
 
-        MethodEnterExitVisitor classVisitor = new MethodEnterExitVisitor(Opcodes.ASM9, classWriter,
-                "test", "()V");
+//        MethodEnterExitVisitor classVisitor = new MethodEnterExitVisitor(Opcodes.ASM9, classWriter,
+//                "test", "()V");
+
+        //  public int test(String name, int age, long idCard, Object obj)
+        ClassMethodParamPrintVisitor classVisitor = new ClassMethodParamPrintVisitor(Opcodes.ASM9, classWriter,
+                Opcodes.ACC_PUBLIC,"test", "(Ljava/lang/String;IJLjava/lang/Object;)I");
 
 
         classReader.accept(classVisitor, ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES);

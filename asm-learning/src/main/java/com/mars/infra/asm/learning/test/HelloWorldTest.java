@@ -14,4 +14,14 @@ public class HelloWorldTest {
         System.out.println("this is a test method.");
         System.out.println("method end");
     }
+
+    public int test(String name, int age, long idCard, Object obj) {
+        System.out.println(name);
+        int hashCode = 0;
+        hashCode += name.hashCode();
+        hashCode += age;
+        hashCode += (int) (idCard % Integer.MAX_VALUE);
+        hashCode += obj.hashCode();
+        return hashCode;
+    }
 }
