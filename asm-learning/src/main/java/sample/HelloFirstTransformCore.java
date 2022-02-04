@@ -45,8 +45,11 @@ class HelloFirstTransformCore {
         ClassClearMethodVisitor cv9 =
                 new ClassClearMethodVisitor(Opcodes.ASM9, classWriter, "verify", "(Ljava/lang/String;Ljava/lang/String;)V");
 
+        ClassMethodInvokeReplaceVisitor cv10 = new ClassMethodInvokeReplaceVisitor(Opcodes.ASM9, classWriter,
+                "test", "(II)V");
 
-        classReader.accept(cv9, ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES);
+
+        classReader.accept(cv10, ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES);
 
         FileUtils.writeBytes(filePath, classWriter.toByteArray());
     }

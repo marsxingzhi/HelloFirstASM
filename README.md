@@ -496,60 +496,22 @@ class MethodParamPrintAdvanceAdapter(
 }
 ```   
 ### 八、方法耗时     
-定义timer字段，然后在方法开始时，添加`timer -= System.currentTimeMillis()`；
-在方法结束时，添加`timer += System.currentTimeMillis()`；
-这样，timer值就表示该方法的耗时
-```Kotlin
-class ComputeTimeAdapter(
-    api: Int,
-    methodVisitor: MethodVisitor,
-    private val owner: String
-) : MethodVisitor(api, methodVisitor) {
+- 定义timer字段，timer值表示该方法的耗时
+- 在方法开始时，添加`timer -= System.currentTimeMillis()`
+- 在方法结束时，添加`timer += System.currentTimeMillis()`
 
-    override fun visitCode() {
-        // 需要加载this变量，如果timer是静态的，则不需要
-        super.visitVarInsn(Opcodes.ALOAD, 0)
-        super.visitInsn(Opcodes.DUP)
+详细代码可参考：`ComputeTimeAdapter`
 
-
-        super.visitFieldInsn(Opcodes.GETFIELD, owner, "timer", "J")
-        super.visitMethodInsn(
-            Opcodes.INVOKESTATIC,
-            "java/lang/System",
-            "currentTimeMillis",
-            "()J",
-            false
-        )
-        super.visitInsn(Opcodes.LSUB)
-        super.visitFieldInsn(Opcodes.PUTFIELD, owner, "timer", "J")
-        super.visitCode()
-    }
-
-    override fun visitInsn(opcode: Int) {
-        if (opcode >= Opcodes.IRETURN && opcode <= Opcodes.RETURN || opcode == Opcodes.ATHROW) {
-            super.visitVarInsn(Opcodes.ALOAD, 0)
-            super.visitInsn(Opcodes.DUP)
-
-
-            super.visitFieldInsn(Opcodes.GETFIELD, owner, "timer", "J")
-            super.visitMethodInsn(
-                Opcodes.INVOKESTATIC,
-                "java/lang/System",
-                "currentTimeMillis",
-                "()J",
-                false
-            )
-            super.visitInsn(Opcodes.LADD)
-            super.visitFieldInsn(Opcodes.PUTFIELD, owner, "timer", "J")
-        }
-        super.visitInsn(opcode)
-    }
-}
-```   
 ### 九、清空方法体     
 - 对应的MethodVisitor返回null
-- 构造一个方法名和描述符相同的空方法
+- 构造一个方法名和描述符相同的空方法   
+
 详细代码可参考：`ClassClearMethodVisitor`
+
+### 十、替换方法调用   
+- 替换Instruction前后，需要保证操作数栈一致   
+
+详细代码可参考：`ClassMethodInvokeReplaceVisitor`
 
 ### Thread-Task  
 线程替换，将系统线程替换成自定义的线程。

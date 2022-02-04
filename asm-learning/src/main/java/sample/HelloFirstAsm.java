@@ -61,4 +61,10 @@ public class HelloFirstAsm {
         }
         throw new IllegalArgumentException("username or password is not correct");
     }
+
+    // ASM：替换方法调用，将Math.max替换成Math.min、System.out.println替换成静态方法
+    public void test(int a, int b) {
+        int c = Math.max(a, b);
+        System.out.println(c);
+    }
 }
