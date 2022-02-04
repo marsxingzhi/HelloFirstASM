@@ -20,29 +20,33 @@ class HelloFirstTransformCore {
         ClassReader classReader = new ClassReader(bytes);
         ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
 
-//        ClassVisitor classVisitor = new ClassChangeVisitor(Opcodes.ASM9, classWriter);
-//        ClassVisitor classVisitor = new ClassFieldRemoveVisitor(Opcodes.ASM9, classWriter,
-//                "strValue", "Ljava/lang/String;");
+        ClassVisitor cv1 = new ClassChangeVisitor(Opcodes.ASM9, classWriter);
 
-//        ClassFieldAddVisitor classVisitor = new ClassFieldAddVisitor(Opcodes.ASM9, classWriter,
-//                Opcodes.ACC_PUBLIC , "objValue", "Ljava/lang/Object;");
+        ClassVisitor cv2 = new ClassFieldRemoveVisitor(Opcodes.ASM9, classWriter,
+                "strValue", "Ljava/lang/String;");
 
-//        ClassMethodRemoveVisitor classVisitor = new ClassMethodRemoveVisitor(Opcodes.ASM9, classWriter,
-//                "add", "(II)I");
-//        ClassMethodAddVisitor classVisitor = new ClassMethodAddVisitor(Opcodes.ASM9, classWriter,
-//                Opcodes.ACC_PUBLIC, "mul", "(II)I");
+        ClassFieldAddVisitor cv3 = new ClassFieldAddVisitor(Opcodes.ASM9, classWriter,
+                Opcodes.ACC_PUBLIC , "objValue", "Ljava/lang/Object;");
 
-//        MethodEnterExitVisitor classVisitor = new MethodEnterExitVisitor(Opcodes.ASM9, classWriter,
-//                "test", "()V");
+        ClassMethodRemoveVisitor cv4 = new ClassMethodRemoveVisitor(Opcodes.ASM9, classWriter,
+                "add", "(II)I");
 
-        //  public int test(String name, int age, long idCard, Object obj)
-//        ClassMethodParamPrintVisitor classVisitor = new ClassMethodParamPrintVisitor(Opcodes.ASM9, classWriter,
-//                Opcodes.ACC_PUBLIC,"test", "(Ljava/lang/String;IJLjava/lang/Object;)I");
+        ClassMethodAddVisitor cv5 = new ClassMethodAddVisitor(Opcodes.ASM9, classWriter,
+                Opcodes.ACC_PUBLIC, "mul", "(II)I");
 
-        ClassMethodTimeVisitor classVisitor = new ClassMethodTimeVisitor(Opcodes.ASM9, classWriter, "add2");
+        MethodEnterExitVisitor cv6 = new MethodEnterExitVisitor(Opcodes.ASM9, classWriter,
+                "test", "()V");
+
+        ClassMethodParamPrintVisitor cv7 = new ClassMethodParamPrintVisitor(Opcodes.ASM9, classWriter,
+                Opcodes.ACC_PUBLIC,"test", "(Ljava/lang/String;IJLjava/lang/Object;)I");
+
+        ClassMethodTimeVisitor cv8 = new ClassMethodTimeVisitor(Opcodes.ASM9, classWriter, "add2");
+
+        ClassClearMethodVisitor cv9 =
+                new ClassClearMethodVisitor(Opcodes.ASM9, classWriter, "verify", "(Ljava/lang/String;Ljava/lang/String;)V");
 
 
-        classReader.accept(classVisitor, ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES);
+        classReader.accept(cv9, ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES);
 
         FileUtils.writeBytes(filePath, classWriter.toByteArray());
     }

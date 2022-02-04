@@ -53,4 +53,12 @@ public class HelloFirstAsm {
         Thread.sleep(100 + num);
         return c;
     }
+
+    // ASM：清空方法体
+    public void verify(String username, String password) throws IllegalArgumentException {
+        if ("tomcat".equals(username) && "123456".equals(password)) {
+            return;
+        }
+        throw new IllegalArgumentException("username or password is not correct");
+    }
 }

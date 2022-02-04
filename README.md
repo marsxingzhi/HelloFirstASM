@@ -545,7 +545,11 @@ class ComputeTimeAdapter(
         super.visitInsn(opcode)
     }
 }
-```
+```   
+### 九、清空方法体     
+- 对应的MethodVisitor返回null
+- 构造一个方法名和描述符相同的空方法
+详细代码可参考：`ClassClearMethodVisitor`
 
 ### Thread-Task  
 线程替换，将系统线程替换成自定义的线程。

@@ -38,4 +38,8 @@ public class HelloWorldTest {
         hashCode += obj.hashCode();
         return hashCode;
     }
+
+    public void verify(String username, String password) throws IllegalArgumentException {
+
+    }
 }
