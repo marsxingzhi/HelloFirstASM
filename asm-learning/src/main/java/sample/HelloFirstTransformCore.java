@@ -48,8 +48,14 @@ class HelloFirstTransformCore {
         ClassMethodInvokeReplaceVisitor cv10 = new ClassMethodInvokeReplaceVisitor(Opcodes.ASM9, classWriter,
                 "test", "(II)V");
 
+        ClassMethodInvokeFindVisitor cv11 = new ClassMethodInvokeFindVisitor(Opcodes.ASM9, classWriter,
+                "test1", "(II)V");
 
-        classReader.accept(cv10, ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES);
+        ClassMethodInvokeFindV2Visitor cv12 = new ClassMethodInvokeFindV2Visitor(Opcodes.ASM9, classWriter,
+                "test3", "(III)V");
+
+
+        classReader.accept(cv12, ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES);
 
         FileUtils.writeBytes(filePath, classWriter.toByteArray());
     }

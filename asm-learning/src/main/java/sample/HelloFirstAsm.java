@@ -18,10 +18,12 @@ public class HelloFirstAsm {
 
     // ASM：删除add方法
     public int add(int a, int b) {
+        test3(a, b, 0);
         return a + b;
     }
 
     public int sub(int a, int b) {
+        test3(a, b, 0);
         return a - b;
     }
 
@@ -64,7 +66,26 @@ public class HelloFirstAsm {
 
     // ASM：替换方法调用，将Math.max替换成Math.min、System.out.println替换成静态方法
     public void test(int a, int b) {
+        test3(a, b, 0);
         int c = Math.max(a, b);
         System.out.println(c);
+    }
+
+    // ASM：查找该方法体内调用了哪些方法
+    public void test1(int a, int b) {
+        int c = Math.addExact(a, b);
+        String line = String.format("%d + %d = %d", a, b, c);
+        System.out.println(line);
+    }
+
+    // ASM：哪些方法调用了test3
+    public void test3(int a, int b, int c) {
+        String line = String.format("a = %d, b = %d, c = %d", a, b, c);
+        System.out.println(line);
+    }
+
+    public int mock() {
+        test3(1, 2, 3);
+        return 1;
     }
 }
