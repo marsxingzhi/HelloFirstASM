@@ -54,8 +54,11 @@ class HelloFirstTransformCore {
         ClassMethodInvokeFindV2Visitor cv12 = new ClassMethodInvokeFindV2Visitor(Opcodes.ASM9, classWriter,
                 "test3", "(III)V");
 
+        ClassMethodOptVisitor cv13 = new ClassMethodOptVisitor(Opcodes.ASM9, classWriter,
+                "test4", "(II)V");
 
-        classReader.accept(cv12, ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES);
+
+        classReader.accept(cv13, ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES);
 
         FileUtils.writeBytes(filePath, classWriter.toByteArray());
     }

@@ -88,4 +88,11 @@ public class HelloFirstAsm {
         test3(1, 2, 3);
         return 1;
     }
+
+    // ASM：优化代码，将int d = c + 0；改成int d = c；
+    public void test4(int a, int b) {
+        int c = a + b;
+        int d = c + 0;
+        System.out.println(d);
+    }
 }

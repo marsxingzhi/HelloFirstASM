@@ -63,7 +63,24 @@ Label的使用可以分成三个步骤：
 
 #### 十一、查找-方法调用        
 - 查找方法A中调用了哪些方法，例如：`ClassMethodInvokeFindVisitor`
-- 查找方法A被哪些方法调用了，例如：`ClassMethodInvokeFindV2Visitor`
+- 查找方法A被哪些方法调用了，例如：`ClassMethodInvokeFindV2Visitor`   
+
+#### 十二、优化方法-删除加0   
+```Java
+// 原方法
+public void test4(int var1, int var2) {
+    int var3 = var1 + var2;
+    int var4 = var3 + 0;
+    System.out.println(var4);
+}
+
+// 优化后，注意：其实我这里只是删除了加0的Instruction
+public void test4(int var1, int var2) {
+    int var3 = var1 + var2;
+    System.out.println(var3);
+}
+```  
+详细代码可参考：`ClassMethodOptVisitor` 
 
 ### Thread-Task  
 线程替换，将系统线程替换成自定义的线程。
