@@ -95,4 +95,12 @@ public class HelloFirstAsm {
         int d = c + 0;
         System.out.println(d);
     }
+
+    // 删除打印语句
+    public void test5(int a, int b) {
+        System.out.println("嘻嘻-☺️");
+        int c = a + b;
+        System.out.println("哈哈哈-😄");
+        System.out.println(c);
+    }
 }

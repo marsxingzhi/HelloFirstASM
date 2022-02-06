@@ -82,6 +82,21 @@ public void test4(int var1, int var2) {
 ```  
 详细代码可参考：`ClassMethodOptVisitor` 
 
+### 十三、优化方法-删除打印语句  
+```Java
+public void test5(int a, int b) {
+    System.out.println("嘻嘻-☺️");  // 待删除
+    int c = a + b;
+    System.out.println("哈哈哈-😄");  // 待删除
+    System.out.println(c);
+}
+```   
+详细代码可参考：`ClassMethodRemovePrintVisitor`
+
 ### Thread-Task  
 线程替换，将系统线程替换成自定义的线程。
 - [x] new Thread
+
+### TODO  
+- [ ] 线程
+- [ ] 删除打印语句，例如：println、Log

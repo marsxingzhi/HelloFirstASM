@@ -7,6 +7,8 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;
 
+import jdk.nashorn.internal.runtime.regexp.joni.constants.OPCode;
+
 /**
  * Created by JohnnySwordMan on 2022/2/1
  */
@@ -57,8 +59,10 @@ class HelloFirstTransformCore {
         ClassMethodOptVisitor cv13 = new ClassMethodOptVisitor(Opcodes.ASM9, classWriter,
                 "test4", "(II)V");
 
+        ClassMethodRemovePrintVisitor cv14 = new ClassMethodRemovePrintVisitor(Opcodes.ASM9, classWriter,
+                "test5", "(II)V");
 
-        classReader.accept(cv13, ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES);
+        classReader.accept(cv14, ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES);
 
         FileUtils.writeBytes(filePath, classWriter.toByteArray());
     }

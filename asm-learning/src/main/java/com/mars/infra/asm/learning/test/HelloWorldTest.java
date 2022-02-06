@@ -42,4 +42,11 @@ public class HelloWorldTest {
     public void verify(String username, String password) throws IllegalArgumentException {
 
     }
+
+    public void test5(int a, int b) {
+        System.out.println("嘻嘻-☺️");
+        int c = a + b;
+        System.out.println("哈哈哈-😄");
+        System.out.println(c);
+    }
 }
