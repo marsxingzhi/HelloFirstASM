@@ -103,4 +103,12 @@ public class HelloFirstAsm {
         System.out.println("哈哈哈-😄");
         System.out.println(c);
     }
+
+    private int val;
+    // ASM：删除多余代码，this.val = this.val
+    public void test6(int a, int b) {
+        int c = a + b;
+        this.val = this.val;
+        System.out.println(c);
+    }
 }

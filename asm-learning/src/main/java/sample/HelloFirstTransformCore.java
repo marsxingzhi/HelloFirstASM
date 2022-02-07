@@ -62,7 +62,10 @@ class HelloFirstTransformCore {
         ClassMethodRemovePrintVisitor cv14 = new ClassMethodRemovePrintVisitor(Opcodes.ASM9, classWriter,
                 "test5", "(II)V");
 
-        classReader.accept(cv14, ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES);
+        ClassMethodRemoveInsnVisitor cv15 = new ClassMethodRemoveInsnVisitor(Opcodes.ASM9, classWriter,
+                "test6", "(II)V");
+
+        classReader.accept(cv15, ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES);
 
         FileUtils.writeBytes(filePath, classWriter.toByteArray());
     }

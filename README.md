@@ -91,7 +91,17 @@ public void test5(int a, int b) {
     System.out.println(c);
 }
 ```   
-详细代码可参考：`ClassMethodRemovePrintVisitor`
+详细代码可参考：`ClassMethodRemovePrintVisitor`        
+
+### 十四、优化方法-删除无意义的语句    
+```Java
+public void test6(int a, int b) {
+    int c = a + b;
+    this.val = this.val;  // 待删除
+    System.out.println(c);
+}
+```     
+详细代码可参考：`ClassMethodRemoveInsnVisitor`
 
 ### Thread-Task  
 线程替换，将系统线程替换成自定义的线程。

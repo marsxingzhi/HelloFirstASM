@@ -49,4 +49,11 @@ public class HelloWorldTest {
         System.out.println("哈哈哈-😄");
         System.out.println(c);
     }
+
+    private int val;
+    public void test6(int a, int b) {
+        int c = a + b;
+        this.val = this.val;
+        System.out.println(c);
+    }
 }
