@@ -50,4 +50,16 @@ public class HelloWorld {
         timer += System.currentTimeMillis();
     }
 }
+```  
+### 6. 移除代码  
+移除`this.val = this.val`代码，代码可参考：[RemoveCodeClassNode](https://github.com/JohnnySwordMan/HelloFirstASM/blob/master/asm/src/main/java/tree/sample/RemoveCodeClassNode.kt)
+```Java
+public class HelloWorld {
+    private int val;
+    public void test(int m, int n) {
+        int len = m + n;
+        this.val = this.val;
+        System.out.println(len);
+    }
+}
 ```

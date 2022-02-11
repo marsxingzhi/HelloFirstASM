@@ -11,6 +11,7 @@ import tree.sample.FieldAddClassNode;
 import tree.sample.FieldRemoveClassNode;
 import tree.sample.MethodAddClassNode;
 import tree.sample.MethodRemoveClassNode;
+import tree.sample.RemoveCodeClassNode;
 
 /**
  * Created by JohnnySwordMan on 2/11/22
@@ -41,7 +42,9 @@ class HelloFirstAsmTransformTree {
 
         ComputeTimerClassNode computeTimerClassNode = new ComputeTimerClassNode(Opcodes.ASM9, cw);
 
-        cr.accept(computeTimerClassNode, ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES);
+        RemoveCodeClassNode removeCodeClassNode = new RemoveCodeClassNode(Opcodes.ASM9, cw, "test", "(II)V");
+
+        cr.accept(removeCodeClassNode, ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES);
 
         return cw.toByteArray();
     }

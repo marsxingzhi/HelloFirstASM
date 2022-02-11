@@ -30,4 +30,11 @@ public class HelloWorld {
     public int add(int a, int b) {
         return a + b;
     }
+
+    private int val;
+    public void test(int m, int n) {
+        int len = m + n;
+        this.val = this.val;
+        System.out.println(len);
+    }
 }
