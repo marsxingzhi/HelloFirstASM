@@ -5,6 +5,9 @@ package thread;
  */
 public class ThreadTest {
 
+    private int intValue = -1;
+    private long longValue;
+
     public void query() {
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -13,6 +16,9 @@ public class ThreadTest {
             }
         });
         thread.start();
+
+        Thread thread1 = new Thread("sss");
+        thread1.start();
     }
 
 //    public void queryShadow() {

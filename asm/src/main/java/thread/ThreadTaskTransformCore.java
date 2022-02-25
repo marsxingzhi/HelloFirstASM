@@ -13,11 +13,22 @@ import org.objectweb.asm.Opcodes;
 public class ThreadTaskTransformCore {
 
     public static void main(String[] args) {
-        String relative_path = "thread/ThreadTest.class";
-        String filePath = FileUtils.getFilePath(relative_path);
+        String filePath = FileUtils.getFilePath("thread/ThreadTest.class");
         byte[] byteArray = FileUtils.readBytes(filePath);
-        ClassWriter classWriter = modifyClass(byteArray);
-        FileUtils.writeBytes(filePath, classWriter.toByteArray());
+
+//        ClassWriter classWriter = modifyClass(byteArray);
+//        FileUtils.writeBytes(filePath, classWriter.toByteArray());
+
+        byte[] newBytes = doTransform(byteArray);
+        FileUtils.writeBytes(filePath, newBytes);
+    }
+
+    private static byte[] doTransform(byte[] originBytes) {
+        ClassReader classReader = new ClassReader(originBytes);
+        ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
+        ThreadOptimizationClassNode threadOptimizationClassNode = new ThreadOptimizationClassNode(classWriter);
+        classReader.accept(threadOptimizationClassNode, ClassReader.EXPAND_FRAMES);
+        return classWriter.toByteArray();
     }
 
     private static ClassWriter modifyClass(byte[] byteArray) {
