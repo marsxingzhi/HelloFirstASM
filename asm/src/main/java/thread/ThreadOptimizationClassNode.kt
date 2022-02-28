@@ -8,8 +8,7 @@ import tree.core.MethodTransformer
 /**
  * Created by JohnnySwordMan on 2/25/22
  */
-class ThreadOptimizationClassNode(private val classVisitor: ClassVisitor?) :
-    ClassNode(Opcodes.ASM9) {
+class ThreadOptimizationClassNode(private val classVisitor: ClassVisitor?) : ClassNode(Opcodes.ASM9) {
 
     override fun visitEnd() {
 
@@ -52,6 +51,12 @@ class ThreadOptimizationClassNode(private val classVisitor: ClassVisitor?) :
                     Opcodes.NEW -> {
                         (it as TypeInsnNode).transformInvokeNew(node)
                     }
+//                    Opcodes.ARETURN -> {
+//                        if (node.desc == "L$THREAD;") {
+//                            node.instructions.insertBefore(it, LdcInsnNode("module-asm"))
+//                            node.instructions.insertBefore(it, MethodInsnNode(Opcodes.INVOKESTATIC, SHADOW_THREAD, "setThreadName", "(Ljava/lang/Thread;Ljava/lang/String;)Ljava/lang/Thread;"))
+//                        }
+//                    }
                 }
             }
 
@@ -64,7 +69,10 @@ class ThreadOptimizationClassNode(private val classVisitor: ClassVisitor?) :
                 THREAD -> {
                     if (this.desc == "(Ljava/lang/Runnable;)V") {
                         this.desc = "(Ljava/lang/Runnable;Ljava/lang/String;)V"
-//                        this.owner = SHADOW_THREAD  在这里替换没用！需要在NEW指令出修改
+//                        this.owner = SHADOW_THREAD  // 在这里替换没用！需要在NEW指令出修改
+                        methodNode.instructions.insertBefore(this, LdcInsnNode("module-asm"))
+                    } else if (this.desc == "(Ljava/lang/String;)V") {
+                        this.desc = "(Ljava/lang/String;Ljava/lang/String;)V"
                         methodNode.instructions.insertBefore(this, LdcInsnNode("module-asm"))
                     }
                 }
