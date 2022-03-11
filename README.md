@@ -19,5 +19,41 @@ Label的使用可以分成三个步骤：
 ## 三、复杂示例(TODO内容)
 ### 1. Thread-Task  
 线程替换，将系统线程替换成自定义的线程。
-- [x] new Thread
+- [x] new Thread 
 
+### 2. AOP  
+aop的简单示例，详细的可以参考[Mixin]()
+例如：替换`TestAop`的`sayHello`方法中的`Log.e`语句
+```java
+public abstract class TestAop {
+
+    /**
+     * 替换Log.e方法
+     */
+    public static void sayHello() {
+        Log.e("TAG-TestAop", "sayHello, 测试");
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```  
+替换之后，如下：
+```java
+public abstract class TestAop {
+
+    public static void sayHello() {
+        Logger.ee("TAG-TestAop", "sayHello, 测试");
+
+        try {
+            Thread.sleep(100L);
+        } catch (InterruptedException var1) {
+            var1.printStackTrace();
+        }
+
+    }
+}
+
+```

@@ -1,6 +1,5 @@
 package sample
 
-import com.sun.org.apache.bcel.internal.generic.ICONST
 import org.objectweb.asm.ClassVisitor
 import org.objectweb.asm.MethodVisitor
 import org.objectweb.asm.Opcodes

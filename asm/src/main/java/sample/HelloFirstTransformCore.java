@@ -7,7 +7,6 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;
 
-import jdk.nashorn.internal.runtime.regexp.joni.constants.OPCode;
 
 /**
  * Created by JohnnySwordMan on 2022/2/1
