@@ -21,8 +21,10 @@ public class AopTransformCore {
     private static byte[] doTransform(byte[] originBytes) {
         ClassReader classReader = new ClassReader(originBytes);
         ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
-        AopClassNode aopClassNode = new AopClassNode(classWriter);
-        classReader.accept(aopClassNode, ClassReader.EXPAND_FRAMES);
+//        AopClassNode aopClassNode = new AopClassNode(classWriter);
+
+        TestClassVisitor testClassVisitor = new TestClassVisitor(classWriter);
+        classReader.accept(testClassVisitor, ClassReader.EXPAND_FRAMES);
         return classWriter.toByteArray();
     }
 
